@@ -76,6 +76,26 @@ namespace apiPrueba.Controllers
             {
                 return BadRequest("Se ingreso un id inválido");
             }
+            if (humano.Edad == 0)
+            {
+                return BadRequest("La edad no puede ser 0");
+            }
+            if (humano.Peso == 0)
+            {
+                return BadRequest("El peso no puede ser 0");
+            }
+            if (humano.Altura == 0)
+            {
+                return BadRequest("La altura no puede ser 0");
+            }
+            if (humano.Nombre.Trim() == "")
+            {
+                return BadRequest("Ingrese un nombre");
+            }
+            if (humano.Genero.Trim() == "")
+            {
+                return BadRequest("Ingrese un género");
+            }
 
             _context.Entry(humano).State = EntityState.Modified;
 
@@ -102,10 +122,31 @@ namespace apiPrueba.Controllers
         [HttpPost]
         public async Task<ActionResult<Humano>> PostHumano(Humano humano)
         {
-          if (_context.Humanos == null)
-          {
-              return Problem("Entity set 'apiPruebaContext.Humano'  is null.");
-          }
+            if (_context.Humanos == null)
+            {
+                return Problem("No se ingresaron datos");
+            }
+            if (humano.Edad == 0)
+            {
+                return BadRequest("La edad no puede ser 0");
+            }
+            if (humano.Peso == 0)
+            {
+                return BadRequest("El peso no puede ser 0");
+            }
+            if (humano.Altura == 0)
+            {
+                return BadRequest("La altura no puede ser 0");
+            }
+            if (humano.Nombre.Trim() == "")
+            {
+                return BadRequest("Ingrese un nombre");
+            }
+            if (humano.Genero.Trim() == "")
+            {
+                return BadRequest("Ingrese un género");
+            }
+
             _context.Humanos.Add(humano);
             await _context.SaveChangesAsync();
 
